@@ -1,4 +1,4 @@
-# Hands-on: Installation
+## Hands-on: Installation
 
 #### Prerequisites:
 	* [Git] [+ GitBash for Windows]
@@ -20,7 +20,7 @@
 
 
 
-# Verify the installation
+## Hands-on: Verify the installation
 
 #### Run the following code:
 	for node in 1 2 3 ; do
