@@ -12,9 +12,19 @@ Linux for Massive Server Deployments
 ![CoreOS features](images/coreos-overview.png) <!-- .element: class="noborder" -->
 
 !SUB
+### Etcd
+![CoreOS etcd](images/etcd.png) <!-- .element: style="width: 50%;" class="noborder" -->
+
+* Distributed Key/Value store
+* hierarchical directory
+* REST API
+
+!SUB
 ### Fleet
 ![CoreOS fleet](images/fleet-overview.png) <!-- .element: class="noborder" -->
-Distributed init system / Scheduler / Nanny
+
+* Distributed init system / Scheduler / Nanny
+* uses etcd, works on top of Systemd
 
 !NOTE
 -Distributed init system
