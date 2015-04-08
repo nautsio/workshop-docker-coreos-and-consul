@@ -1,16 +1,20 @@
 ## Hands-on: Deploy Applications
 
 #### Submit the paas-monitor template
-	fleetctl submit paas-monitor\@.service
+	fleetctl submit paas-monitor@.service
 
 #### Load the paas-monitor app
-	fleetctl load paas-monitor\@{1..6}.service
+	fleetctl load paas-monitor@{1..6}.service
 
 #### Start the paas-monitor app
-	fleetctl start paas-monitor\@{1..6}.service
+	fleetctl start paas-monitor@{1..6}.service
 
 #### Check the status of the paas-monitor app
 	fleetctl list-units | grep paas-monitor
+
+####### windows users: 
+	use scp to copy the file to core-01 and run fleetctl from core-01
+	example: scp ../fleet-units/paas-monitor/paas-monitor@.service core@172.17.8.101:~
 
 
 
@@ -38,10 +42,10 @@
 	sed -i -e 's/--env RELEASE=[^ ]*/--env RELEASE=v2/' paas-monitor\@.service
 
 #### Destroy the paas-monitor unit service
-	fleetctl destroy paas-monitor\@.service
+	fleetctl destroy paas-monitor@.service
 
 #### Submit the updated unit template
-	fleetctl submit paas-monitor\@.service
+	fleetctl submit paas-monitor@.service
 
 
 
@@ -49,10 +53,10 @@
 ## Hands-on: Rolling upgrade [2]
 
 #### Load 6 new instances of the paas-monitor
-	fleetctl load paas-monitor\@1{1..6}.service
+	fleetctl load paas-monitor@1{1..6}.service
 
 #### Start 6 new instances of the paas-monitor 
-	fleetctl start paas-monitor\@1{1..6}.service
+	fleetctl start paas-monitor@1{1..6}.service
 
 #### List stop and destroy the original 6 instances
 	fleetctl list-units | grep 'paas-monitor\@1[1-6].service' | grep running
