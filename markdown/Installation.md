@@ -25,8 +25,11 @@ eval "$(ssh-agent)"
 ssh-add ~/.vagrant.d/insecure_private_key
 vagrant ssh core-01 -- -A 
 
-export FLEETCTL_TUNNEL=127.0.0.1:2222
 fleetctl list-machines
+```
+* if you want to use fleetctl from your local machine
+```
+export FLEETCTL_TUNNEL=127.0.0.1:2222
 ```
 
 !SUB
