@@ -84,12 +84,17 @@ After=            another service
 
 [Service]
 Restart=          indicates whether a restart is needed
-RestartSec=       between restarts
 EnvironmentFile=  to load before running commands
-TimeoutStartSec=  timeout on start
+
 ExecStartPre=     command to run in preparation
 ExecStart=        command to start the service
 ExecStop=         command to stop the service
+
+RestartSec=       between restarts
+TimeoutStartSec=  timeout on start
+
+SuccessExitStatus= defines succesfull exits.
+SyslogIdentifier=  identifier of the log entries.
 ```
 
 !SUB
