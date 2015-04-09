@@ -47,13 +47,36 @@ for node in 1 2 3 ; do
 	vagrant ssh -c "systemctl | grep consul" core-0$node
 done 
 
+!SLIDE
+## Hands-on: checkout the Consul Console
+
 !SUB
-### Hands-on: checkout the Consul Console
 ![consul-console](images/consul-console.png)
 
 * the consul console is listing on port 8500 on each machine
 * setup a tunnel and navigate to http://localhost:8500
-
+* how many instances of the http-router do you see running?
 
 !NOTE
 vagrant ssh core-01 -- -A -L8500:172.17.8.101:8500
+
+!SLIDE
+## Hands-on: Checkout Consul Templates
+
+!SUB
+## Hands-on: Checkout the HAProxy configuration
+
+* use docker exec to look at the HAProxy configuration  /etc/haproxy/haproxy.cfg of the consul-http-router-lb
+* how many entries do you see listed?
+
+!NOTE
+vagrant ssh core-01 -- docker exec consul-http-router-lb cat /etc/haproxy/haproxy.cfg
+
+!SUB
+## Hands-on: Checkout the NGiNX configuration
+
+* use docker exec to look at the NGiNX configuration  /etc/nginx/nginx.conf of the consul-http-router
+* how many backends are registered?
+
+!NOTE
+vagrant ssh core-01 -- docker exec consul-http-router cat /etc/nginx/nginx.conf

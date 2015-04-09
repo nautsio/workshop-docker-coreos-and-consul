@@ -15,7 +15,7 @@
        d43c0744622b:1337  v1       Hello World from v1       55       7       6
 ```
 
-!NOTE
+!SUB
 ### Hands-on: typing instructions
 ```shell
 #### Submit the paas-monitor template
@@ -38,6 +38,7 @@ fleetctl list-units | grep paas-monitor
 ### Hands-on: Rolling upgrade
 * Change the environment variable RELEASE to v2 in the unit file
 * perform a rolling upgrade using fleetctl
+* continuously watch the monitor!
 
 !SUB
 ### Hands-on: typing instructions
@@ -68,14 +69,16 @@ fleetctl destroy paas-monitor@{1..6}.service
 ### Hands-on: killing an instance
 * start a docker event stream.
 * kill one of the paas-monitor instance.
-* watch the paas-monitor.  What happens?
+* watch the paas-monitor. What happens?
 
 !SUB
 ### Hands-on: typing instructions
 ```
 # in seperate window
+open http://paas-monitor.127.0.0.1.xip.io:8080
 vagrant ssh core-01 --  docker events'
 vagrant ssh core-01 --  'docker kill $(docker ps | grep paas-monitor | awk "{ print \$NF;}" | head -1 ) '
+```
 
 !SLIDE
 ## Hands-on: killing a machine
@@ -83,9 +86,11 @@ vagrant ssh core-01 --  'docker kill $(docker ps | grep paas-monitor | awk "{ pr
 !SUB
 ### Hands-on: killing a machine
 * stop the machine core-03
-* watch the paas-monitor.  What happens?
+* watch the paas-monitor. What happens?
 
 !SUB
 ### Hands-on: typing instructions
 ```
+open http://paas-monitor.127.0.0.1.xip.io:8080
 vagrant ssh core-03 --  sudo shutdown -h now'
+```
