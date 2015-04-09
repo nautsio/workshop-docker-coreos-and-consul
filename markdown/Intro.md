@@ -1,20 +1,12 @@
-# Agenda
-* Docker versus application Runtime platform
-* Components
-	* CoreOS
-	* Cloud config
-	* etcd
-	* Fleet
-	* Consul
-	* Registrator
-	* HA Proxy
-	* Datadog
-
-
-
-# Hands-on
-* Install CoreOS, Consul, Registrator, HA Proxy
-* Deploy Application
-* Fail-over
-* DataDog (monitoring)
-* Log forwarding
+### Agenda
+* Theory
+    * Docker vs Platform
+    * CoreOS
+    * Fleet
+    * Consul
+    * Registrator
+    * Consul Templates
+* Hands-on
+     * Install CoreOS
+     * Deploy Application
+     * Fail-over
