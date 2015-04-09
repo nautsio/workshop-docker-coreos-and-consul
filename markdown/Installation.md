@@ -62,9 +62,11 @@ done
 * how many instances of the http-router do you see running?
 
 !SUB
-# Hands-on: typing instruction
+### Hands-on: typing instruction
+```
 vagrant ssh core-01 -- -A -L8500:172.17.8.101:8500
 open http://127.0.0.1:8500
+```
 
 !SLIDE
 ## Hands-on: Checkout Consul Templates
