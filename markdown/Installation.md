@@ -74,17 +74,21 @@ open http://127.0.0.1:8500
 !SUB
 ## Hands-on: Checkout the HAProxy configuration
 
+* use docker exec to look at the HAProxy template /haproxy.ctmpl of the consul-http-router-lb
 * use docker exec to look at the HAProxy configuration  /etc/haproxy/haproxy.cfg of the consul-http-router-lb
 * how many entries do you see listed?
 
 !NOTE
+vagrant ssh core-01 -- docker exec consul-http-router-lb cat /haproxy.ctmpl
 vagrant ssh core-01 -- docker exec consul-http-router-lb cat /etc/haproxy/haproxy.cfg
 
 !SUB
 ## Hands-on: Checkout the NGiNX configuration
 
+* use docker exec to look at the NGiNX configuration  /nginx.ctmpl of the consul-http-router
 * use docker exec to look at the NGiNX configuration  /etc/nginx/nginx.conf of the consul-http-router
 * how many backends are registered?
 
 !NOTE
+vagrant ssh core-01 -- docker exec consul-http-router cat /nginx.ctmpl
 vagrant ssh core-01 -- docker exec consul-http-router cat /etc/nginx/nginx.conf
