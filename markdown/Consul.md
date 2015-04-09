@@ -5,7 +5,7 @@
 !SUB
 ## Consul introduction
 
-Consul "is a tool for discovering and configuring services in your infrastructure"
+Consul is a tool for discovering and configuring services in your infrastructure
 
 
 [_consul.io_](http://www.consul.io)
@@ -20,9 +20,6 @@ Consul "is a tool for discovering and configuring services in your infrastructur
  - Multi-datacenter
 
 
-[_consul.io_](http://www.consul.io)
-
-
 !SUB
 
 ### Consul works with
@@ -33,3 +30,12 @@ Consul "is a tool for discovering and configuring services in your infrastructur
  - A DNS interface (compatibility)
  - A REST interface (rich API)
 
+!SUB
+
+### Why Consul instead of etcd?
+
+ - DNS interface 
+ - developer utilities
+     - console
+     - consul template 
+     - consul env 
