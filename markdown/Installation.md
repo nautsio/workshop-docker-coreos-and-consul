@@ -7,7 +7,7 @@
 + [Vagrant] 1.6 or greater.
 
 !SUB
-### Exercise: Start the cluster
+### Hands-on: Start the cluster
 ```
 git clone \
   https://github.com/mvanholsteijn/coreos-container-platform-as-a-service.git
@@ -17,7 +17,7 @@ vagrant up
 ```
 
 !SUB
-### Exercise: Setup ssh and list machines with fleetctl
+### Hands-on: Setup ssh and list machines with fleetctl
 
 ```
 eval "$(ssh-agent)" 
@@ -29,7 +29,7 @@ fleetctl list-machines
 ```
 
 !SUB
-### Exercise: Verify the installation
+### Hands-on: Verify the installation
 
 * use systemctl on each machine 
 * to check that the following services are running
@@ -48,7 +48,7 @@ for node in 1 2 3 ; do
 done 
 
 !SUB
-### Exercise: checkout the Consul Console
+### Hands-on: checkout the Consul Console
 ![consul-console](images/consul-console.png)
 
 * the consul console is listing on port 8500 on each machine

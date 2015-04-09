@@ -152,6 +152,7 @@ fleetctl start           - request systemd to start the unit
 fleetctl stop            - request systemd to stop unit
 fleetctl destroy         - stops and removes the unit file
 fleetctl status          - shows the status of a unit
+fleetctl cat             - shows the unit file
 fleetctl journal         - show unit journals
 fleetctl list-units      - lists all active units
 fleetctl list-unit-files - lists all unit files
@@ -169,6 +170,7 @@ fleetctl ssh <machine-id> - ssh into machine
 ```
 systemctl          - lists all system units
 systemctl status   - of a specific unit
+systemctl cat      - shows the content of a unit file
 journalctl         - show all log output
 journalctl -u      - show log output of a unit
 docker             - manage docker on local host

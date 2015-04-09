@@ -34,7 +34,7 @@ Open http://paas-monitor.127.0.0.1.xip.io:8080 and click 'start'
 ### Hands-on: Rolling upgrade
 
 ```sh
-#### Mimic a new release by changing the RELEASE env variable in the paas-monitor application unit template.
+#### Mimic a new release of the template 
 sed -i -e 's/--env RELEASE=[^ ]*/--env RELEASE=v2/'  paas-monitor\@.service
 
 #### Destroy the old and submit new unit template file 
