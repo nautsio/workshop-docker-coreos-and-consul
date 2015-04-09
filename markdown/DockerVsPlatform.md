@@ -1,4 +1,20 @@
-# Docker is not enough!
+## Docker is not enough!
 
-![alt text][logo]
-[logo]: images/logo.jpg "Logo Title Text 2"
+![logo](images/docker.jpg) 
+
+!SUB
+##  Containers are just containers
+* Application Deployments
+* High Availability
+* Monitoring
+* Management & Logging
+
+!SUB
+##  You need a complete eco-system!
+![port](images/container-port.jpg) 
+
+!NOTE 
+"Yangshan-Port-Balanced" by Marqueed at en.wikipedia. Licensed under CC BY 3.0 via Wikimedia Commons - http://commons.wikimedia.org/wiki/File:Yangshan-Port-Balanced.jpg#/media/File:Yangshan-Port-Balanced.jpg"
+
+
+
