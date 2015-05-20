@@ -1,6 +1,6 @@
 ## Hands-on: Installation
 
-https://github.com/cargonauts/ha-docker-coreos-and-consul.git
+http://cargonauts.io/ha-docker-coreos-and-consul
 
 !SUB
 ### Prerequisites
