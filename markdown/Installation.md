@@ -1,5 +1,7 @@
 ## Hands-on: Installation
 
+https://github.com/cargonauts/ha-docker-coreos-and-consul.git
+
 !SUB
 ### Prerequisites
 + [Git] [+ GitBash for Windows]
