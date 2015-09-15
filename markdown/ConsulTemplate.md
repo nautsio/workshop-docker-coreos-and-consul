@@ -46,7 +46,7 @@ https://github.com/hashicorp/consul-template#templating-language
 ![plus](images/plus.png) <!-- .element: class="noborder" -->
 ![HAProxy logo](images/haproxy-logo.png) <!-- .element: class="noborder" -->
 
-!SUB 
+!SUB
 ### Snippet Consul template for HAProxy configuration
 ```
 listen http-in
@@ -79,8 +79,8 @@ http {
 
 !SUB
 ### prepackaged images
-* HTTP Router Load Balancer image [`cargonauts/consul-http-router-lb`](https://registry.hub.docker.com/u/cargonauts/consul-http-router-lb/) 
-* HTTP Router image [`cargonauts/consul-http-router`](https://registry.hub.docker.com/u/cargonauts/consul-http-router/) 
+* HTTP Router Load Balancer image [`cargonauts/consul-http-router-lb`](https://registry.hub.docker.com/u/cargonauts/consul-http-router-lb/)
+* HTTP Router image [`cargonauts/consul-http-router`](https://registry.hub.docker.com/u/cargonauts/consul-http-router/)
 
-The source can be found on https://github.com/cargonauts
+The source can be found on https://github.com/nautsio
 
