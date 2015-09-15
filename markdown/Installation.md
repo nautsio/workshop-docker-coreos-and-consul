@@ -16,6 +16,8 @@ git clone \
 cd coreos-container-platform-as-a-service
 cd vagrant
 vagrant up
+brew install fleetctl
+export FLEETCTL_TUNNEL=127.0.0.1:2222
 ./is_platform_ready.sh
 
 ```
@@ -42,9 +44,7 @@ export FLEETCTL_TUNNEL=127.0.0.1:2222
 * to check that the following services are running
 
 ```
-loaded active running   consul-http-router-lb
 loaded active running   consul-http-router
-loaded active running   Consul Server Announcer
 loaded active running   Registrator
 loaded active running   Consul Server Agent
 ```
