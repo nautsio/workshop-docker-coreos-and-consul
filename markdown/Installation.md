@@ -1,6 +1,6 @@
 ## Hands-on: Installation
 
-http://cargonauts.io/ha-docker-coreos-and-consul
+http://nauts.io/workshop-docker-coreos-and-consul
 
 !SUB
 ### Prerequisites
@@ -23,9 +23,9 @@ vagrant up
 ### Hands-on: Setup ssh and list machines with fleetctl
 
 ```
-eval "$(ssh-agent)" 
+eval "$(ssh-agent)"
 ssh-add ~/.vagrant.d/insecure_private_key
-vagrant ssh core-01 -- -A 
+vagrant ssh core-01 -- -A
 
 fleetctl list-machines
 ```
@@ -37,7 +37,7 @@ export FLEETCTL_TUNNEL=127.0.0.1:2222
 !SUB
 ### Hands-on: Verify the installation
 
-* use systemctl on each machine 
+* use systemctl on each machine
 * to check that the following services are running
 
 ```
@@ -51,7 +51,7 @@ loaded active running   Consul Server Agent
 !NOTE
 for node in 1 2 3 ; do
 	vagrant ssh -c "systemctl | grep consul" core-0$node
-done 
+done
 
 !SLIDE
 ## Hands-on: checkout the Consul Console
