@@ -3,7 +3,7 @@
 !SUB
 ### Hands-on: Deploy Application
 * Deploy 6 instances of the paas-monitor using fleetctl and this unit file --> [paas-monitor@.service](https://raw.githubusercontent.com/mvanholsteijn/coreos-container-platform-as-a-service/master/fleet-units/paas-monitor/paas-monitor%40.service)  
-* Open http://paas-monitor.127.0.0.1.xip.io:8080 and click 'start'
+* Open http://paas-monitor.127.0.0.1.xip.io:8080 
 
 ```
        host               rel      message                   #C       ART     LRT
