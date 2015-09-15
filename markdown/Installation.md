@@ -16,6 +16,7 @@ git clone \
 cd coreos-container-platform-as-a-service
 cd vagrant
 vagrant up
+./is_platform_ready.sh
 
 ```
 
