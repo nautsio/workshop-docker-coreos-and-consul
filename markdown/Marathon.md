@@ -1,8 +1,6 @@
 ### Hands-on: Using Mesos and Marathon (Advanced)
 
-* create a deployment for 1 zookeeper, 1 mesos master and 1 marathon instance
-* and a zookeeper slave on each node
-* and deploy the paas-monitor using marathon using [paas-monitor-marathon.json](https://raw.githubusercontent.com/mvanholsteijn/paas-monitor/master/marathon.json)
+![Mesos Marathon setup](../images/mesos-marathon-setup.jpg) <!-- .element: class="noborder" -->
 
 !SUB
 ### Hands-on: Create a zookeeper unit
