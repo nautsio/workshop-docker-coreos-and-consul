@@ -1,30 +1,28 @@
----
----
 <!doctype html>
 <html lang="en">
 
 	<head>
 		<meta charset="utf-8">
 
-		<title>{{ site.title }}</title>
+		<title>A High Available Docker Container Platform using CoreOS and Consul</title>
 
-		<meta name="description" content="{{ site.title }}">
-		<meta name="author" content="{{ site.author }}">
+		<meta name="description" content="A High Available Docker Container Platform using CoreOS and Consul">
+		<meta name="author" content="Mark van Holsteijn, Thomas Kruitbosch, Ade Mochtar">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<link rel="stylesheet" href="{{ site.cdn }}/reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="{{ site.cdn }}/css/presentation.css" id="theme">
+		<link rel="stylesheet" href="http://cdn.nauts.io/reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="http://cdn.nauts.io/css/presentation.css" id="theme">
 
 		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="{{ site.cdn }}/css/highlightjs-tomorrow.css">
+		<link rel="stylesheet" href="http://cdn.nauts.io/css/highlightjs-tomorrow.css">
 
-		<link rel="stylesheet" href="{{ site.cdn }}/css/ribbon.css" />
+		<link rel="stylesheet" href="http://cdn.nauts.io/css/ribbon.css" />
 		<!--[if lt IE 9]>
-		<link rel="stylesheet" href="{{ site.cdn }}/css/ribbon.ie.css" />
+		<link rel="stylesheet" href="http://cdn.nauts.io/css/ribbon.ie.css" />
 		<![endif]-->
 
 		<!-- Printing and PDF exports -->
@@ -32,12 +30,12 @@
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '{{ site.cdn }}/reveal.js/css/print/pdf.css' : '{{ site.cdn }}/reveal.js/css/print/paper.css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'http://cdn.nauts.io/reveal.js/css/print/pdf.css' : 'http://cdn.nauts.io/reveal.js/css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
 		<!--[if lt IE 9]>
-		<script src="{{ site.cdn }}/reveal.js/lib/js/html5shiv.js"></script>
+		<script src="http://cdn.nauts.io/reveal.js/lib/js/html5shiv.js"></script>
 		<![endif]-->
 	</head>
 
@@ -122,8 +120,8 @@
 
 		<a class="github-fork-ribbon right-top" href="https://xebia.com/careers/datacenter-automation-hero" title="We're hiring!">We're hiring!</a>
 
-		<script src="{{ site.cdn }}/reveal.js/lib/js/head.min.js"></script>
-		<script src="{{ site.cdn }}/reveal.js/js/reveal.js"></script>
+		<script src="http://cdn.nauts.io/reveal.js/lib/js/head.min.js"></script>
+		<script src="http://cdn.nauts.io/reveal.js/js/reveal.js"></script>
 
 		<script>
 
@@ -139,12 +137,12 @@
 
 				// Optional reveal.js plugins
 				dependencies: [
-					{ src: '{{ site.cdn }}/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: '{{ site.cdn }}/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '{{ site.cdn }}/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '{{ site.cdn }}/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: '{{ site.cdn }}/reveal.js/plugin/zoom-js/zoom.js', async: true },
-					{ src: '{{ site.cdn }}/reveal.js/plugin/notes/notes.js', async: true }
+					{ src: 'http://cdn.nauts.io/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'http://cdn.nauts.io/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://cdn.nauts.io/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'http://cdn.nauts.io/reveal.js/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'http://cdn.nauts.io/reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: 'http://cdn.nauts.io/reveal.js/plugin/notes/notes.js', async: true }
 				]
 			});
 

@@ -7,7 +7,6 @@ http://nauts.io/workshop-docker-coreos-and-consul
 + [Git] [+ GitBash for Windows]
 + [VirtualBox] 4.3.10 or greater.
 + [Vagrant] 1.6 or greater.
-+ fleetctl installed.
 
 !SUB
 ### Hands-on: Start the cluster
@@ -17,41 +16,43 @@ git clone \
 cd coreos-container-platform-as-a-service
 cd vagrant
 vagrant up
-. ./setenv
+brew install fleetctl
+export FLEETCTL_TUNNEL=127.0.0.1:2222
+./is_platform_ready.sh
+
 ```
 
 !SUB
 ### Hands-on: Setup ssh and list machines with fleetctl
 
 ```
-brew install fleetctl
 eval "$(ssh-agent)"
 ssh-add ~/.vagrant.d/insecure_private_key
 vagrant ssh core-01 -- -A
 
 fleetctl list-machines
 ```
+* if you want to use fleetctl from your local machine
+```
+export FLEETCTL_TUNNEL=127.0.0.1:2222
+```
 
 !SUB
 ### Hands-on: Verify the installation
 
-* use fleetctl to check that all services are running
+* use systemctl on each machine
+* to check that the following services are running
+
 ```
-ssh vagrant core-01 -- -t watch fleetctl list-units
+loaded active running   consul-http-router
+loaded active running   Registrator
+loaded active running   Consul Server Agent
 ```
-* wait until it looks like this:
-````
-UNIT                                    MACHINE                         ACTIVE  SUB
-consul-http-router.service              6e1a9adb.../172.17.8.102        active  running
-consul-http-router.service              9b969332.../172.17.8.101        active  running
-consul-http-router.service              dd9eb383.../172.17.8.103        active  running
-consul-server-registrator.service       6e1a9adb.../172.17.8.102        active  running
-consul-server-registrator.service       9b969332.../172.17.8.101        active  running
-consul-server-registrator.service       dd9eb383.../172.17.8.103        active  running
-consul-server.service                   6e1a9adb.../172.17.8.102        active  running
-consul-server.service                   9b969332.../172.17.8.101        active  running
-consul-server.service                   dd9eb383.../172.17.8.103        active  running
-```
+
+!NOTE
+for node in 1 2 3 ; do
+	vagrant ssh -c "systemctl | grep consul" core-0$node
+done
 
 !SLIDE
 ## Hands-on: checkout the Consul Console
@@ -61,7 +62,7 @@ consul-server.service                   dd9eb383.../172.17.8.103        active  
 
 * the consul console is listening on port 8500 on each machine
 * setup a tunnel and navigate to http://localhost:8500
-* how many instances of the consul-dns service do you see running?
+* how many instances of the http-router do you see running?
 
 !SUB
 ### Hands-on: typing instruction

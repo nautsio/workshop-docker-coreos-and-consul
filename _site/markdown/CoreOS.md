@@ -115,19 +115,19 @@ Global=           Select all machines in the cluster
 
 ```
 [Service]
+EnvironmentFile=/etc/environment
+
+ExecStart=/bin/sh -c "/usr/bin/docker run --name <instance-name>"
+
 Restart=always
 RestartSec=30
 TimeoutStartSec=3m
 
-EnvironmentFile=/etc/environment
-
-ExecStartPre=-/usr/bin/docker kill %p
-ExecStartPre=-/usr/bin/docker rm %p
+ExecStartPre=-/usr/bin/docker kill <instance-name>
+ExecStartPre=-/usr/bin/docker rm <instance-name>
 ExecStartPre=/usr/bin/docker pull <image>
 
-ExecStart=/bin/sh -c "/usr/bin/docker run --name %p <image>"
-
-ExecStop=/usr/bin/docker stop %p
+ExecStop=/usr/bin/docker stop <instance-name>
 ```
 
 !SUB
@@ -137,11 +137,10 @@ ExecStop=/usr/bin/docker stop %p
 * the part after @ is accessible in the unit as %i
 
 ```
-ExecStartPre=-/usr/bin/docker kill %p-%i
-ExecStartPre=-/usr/bin/docker rm %p-%i
+ExecStart=/usr/bin/docker run --name <instance-name>-%i
+ExecStartPre=-/usr/bin/docker kill <instance-name>-%i
+ExecStartPre=-/usr/bin/docker rm <instance-name>-%i
 ExecStartPre=/usr/bin/docker pull <image>
-
-ExecStart=/usr/bin/docker run --name %p-%i
 ```
 
 * Now you can create,start,stop instances
