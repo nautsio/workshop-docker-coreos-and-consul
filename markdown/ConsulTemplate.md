@@ -47,6 +47,10 @@ $ consul-template \
 ![NGiNX logo](images/nginx-logo.png) <!-- .element: class="noborder" -->
 
 !SUB
+### Docker Consul Registrator Flow
+![Docker Consul Registrator Flow(images/docker-consul-registrator-flow.png) <!-- .element: class="noborder" -->
+
+!SUB
 ### Snippet Consul template for NGiNX configuration
 
 ```
