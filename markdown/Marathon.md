@@ -7,6 +7,7 @@
 !SUB
 ### Hands-on: Create a zookeeper unit
 * Create a zookeeper unit file using cargonauts/zookeeper:0.0.1
+* use the host network
 * expose and publish on port 2181, tag it as a 'zk'  service
 
 !SUB
@@ -15,12 +16,12 @@
 
 ```
 /usr/bin/docker run 
-        --name %p 
-        --net host
-        --publish :2181:2181 
-	--env SERVICE_NAME=zookeeper
-        --env SERVICE_2181_TAGS=zk
-        cargonauts/zookeeper:0.0.1
+    --name %p 
+    --net host
+    --publish :2181:2181 
+    --env SERVICE_NAME=zookeeper
+    --env SERVICE_2181_TAGS=zk
+    cargonauts/zookeeper:0.0.1
 ```
 
 !SUB
