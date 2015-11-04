@@ -10,3 +10,5 @@
      * Install CoreOS
      * Deploy Application
      * Fail-over
+     * DataDog
+     * Mesos and Marathon  (advanced)
