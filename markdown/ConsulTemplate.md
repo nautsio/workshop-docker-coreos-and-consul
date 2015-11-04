@@ -8,6 +8,22 @@
 
 https://github.com/hashicorp/consul-template
 
+!SUB
+### Go Template Language examples
+
+```
+##Query all nodes
+{{nodes}}
+
+##Query all services named webapp
+{{service "webapp"}}
+
+###Iterate over all webapp services, accessing several properties
+{{range service "webapp@datacenter"}}
+server {{.Name}} {{.Address}}:{{.Port}}{{end}}
+```
+https://github.com/hashicorp/consul-template#templating-language
+
 
 !SUB
 ###Example
@@ -25,40 +41,10 @@ $ consul-template \
 
 
 !SUB
-### Go Template Language examples
-
-```
-##Query all nodes
-{{nodes}}
-
-##Query all services named webapp
-{{service "webapp"}}
-
-###Iterate over all webapp services, accessing several properties
-{{range service "webapp@datacenter"}}
-server {{.Name}} {{.Address}}:{{.Port}}{{end}}
-```
-https://github.com/hashicorp/consul-template#templating-language
-
-!SUB
-### Load Balancing
-![Consul logo](images/consul-logo.png) <!-- .element: class="noborder" -->
-![plus](images/plus.png) <!-- .element: class="noborder" -->
-![HAProxy logo](images/haproxy-logo.png) <!-- .element: class="noborder" -->
-
-!SUB
-### Snippet Consul template for HAProxy configuration
-```
-listen http-in
-    bind *:80{{range $index, $service := service "consul-http-router"}}
-    server s{{$index}} {{$service.Address}}:{{$service.Port}}{{end}}
-```
-
-!SUB
 ### HTTP Reverse Proxy
 ![Consul logo](images/consul-logo.png) <!-- .element: class="noborder" -->
 ![plus](images/plus.png) <!-- .element: class="noborder" -->
-![HAProxy logo](images/nginx-logo.png) <!-- .element: class="noborder" -->
+![NGiNX logo](images/nginx-logo.png) <!-- .element: class="noborder" -->
 
 !SUB
 ### Snippet Consul template for NGiNX configuration
@@ -79,8 +65,6 @@ http {
 
 !SUB
 ### prepackaged images
-* HTTP Router Load Balancer image [`cargonauts/consul-http-router-lb`](https://registry.hub.docker.com/u/cargonauts/consul-http-router-lb/)
 * HTTP Router image [`cargonauts/consul-http-router`](https://registry.hub.docker.com/u/cargonauts/consul-http-router/)
 
 The source can be found on https://github.com/nautsio
-
