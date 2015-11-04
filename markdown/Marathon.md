@@ -92,12 +92,12 @@ docker run
 !SUB
 ### Create the Marathon unit
 * Create a marathon unit file using mesosphere/marathon:v0.10.0
-* Read on https://hub.docker.com/r/mesosphere/marathon
 * expose and publish on port 8888 tag it as 'http'
 * use host networking
 * Start after the zookeeper, the mesos-master and mesos-slave
 * lookup the zookeeper IP address in Consul using curl or dig on startup.
 * wait for the zookeeper service to become available
+* Read more https://hub.docker.com/r/mesosphere/marathon
 
 !SUB
 ### Hands-on: Tip Mesos Slave unit file
@@ -114,6 +114,7 @@ docker run
         --master $ZOOKEEPERS/mesos 
         --zk $ZOOKEEPERS/marathon 
         --http_port 8888
+```
 
 !SUB
 ### Hands-on: Start the paas-monitor application
