@@ -3,6 +3,16 @@
 ![Mesos Marathon setup](images/mesos-marathon-setup.jpg) <!-- .element: class="noborder" -->
 
 !SUB
+### Hands-on
+
+* This advanced hands-on has no detailed typing instruction.
+* The goal is to setup mesos and marathon as an alternative to fleet.
+* You need 1 zookeeper, 1 mesos master, 1 marathon instance and a mesos slave on each machine
+* finally you will deploy the paas-monitor as a marathon application
+* The order in which to create: zookeeper, master, slaves, marathon
+* use consul and the registrator for service discovery
+
+!SUB
 ### Hands-on: Create a zookeeper unit
 * Create a zookeeper unit file using cargonauts/zookeeper:0.0.1
 * use the host network
@@ -13,10 +23,10 @@
 * The resulting Docker run command roughly should look like this:
 
 ```
-/usr/bin/docker run 
-    --name %p 
+/usr/bin/docker run
+    --name %p
     --net host
-    --publish :2181:2181 
+    --publish :2181:2181
     --env SERVICE_NAME=zookeeper
     --env SERVICE_2181_TAGS=zk
     cargonauts/zookeeper:0.0.1
@@ -38,7 +48,7 @@
 * The resulting Docker run command roughly should look like this:
 
 ```
-docker run 
+docker run
       --name x-mesos-master
       --net host
       --publish :5050:5050
@@ -55,7 +65,7 @@ docker run
 !SUB
 ### Create the Mesos Slave unit
 * Create a zookeeper unit file using mesosphere/mesos-slave:0.23.0-1.0.ubuntu1404
-* expose and publish on port 5051 
+* expose and publish on port 5051
 * Start after the zookeeper and after the mesos-master
 * lookup the zookeeper IP address in Consul using curl or dig on startup.
 * wait for the zookeeper service to become available
@@ -67,23 +77,23 @@ docker run
 * The resulting Docker run command roughly should look like this:
 
 ```
-/usr/bin/docker run 
-        --name x-%p 
-        --privileged 
-        --net host 
-        --publish :5051:5051 
-        --volume /var/lib/docker/btrfs/subvolumes:/var/lib/docker/btrfs/subvolumes 
-        --volume /var/run/docker.sock:/var/run/docker.sock 
-        --volume /sys:/sys 
-        --volume /cgroup:/cgroup 
-        --volume /usr/bin/docker:/usr/bin/docker 
-        --volume /lib/libdevmapper.so.1.02:/lib/x86_64-linux-gnu/libdevmapper.so.1.02 
-        --volume /dev/log:/dev/log 
-        --env SERVICE_NAME=mesos-slave 
-        --env MESOS_MASTER=zk://<zookeeper-address>:<zookeeper-port>/mesos 
-        --env MESOS_EXECUTOR_REGISTRATION_TIMEOUT=5mins 
-        --env MESOS_ISOLATOR=cgroups/cpu,cgroups/mem 
-        --env MESOS_CONTAINERIZERS=docker,mesos 
+/usr/bin/docker run
+        --name x-%p
+        --privileged
+        --net host
+        --publish :5051:5051
+        --volume /var/lib/docker/btrfs/subvolumes:/var/lib/docker/btrfs/subvolumes
+        --volume /var/run/docker.sock:/var/run/docker.sock
+        --volume /sys:/sys
+        --volume /cgroup:/cgroup
+        --volume /usr/bin/docker:/usr/bin/docker
+        --volume /lib/libdevmapper.so.1.02:/lib/x86_64-linux-gnu/libdevmapper.so.1.02
+        --volume /dev/log:/dev/log
+        --env SERVICE_NAME=mesos-slave
+        --env MESOS_MASTER=zk://<zookeeper-address>:<zookeeper-port>/mesos
+        --env MESOS_EXECUTOR_REGISTRATION_TIMEOUT=5mins
+        --env MESOS_ISOLATOR=cgroups/cpu,cgroups/mem
+        --env MESOS_CONTAINERIZERS=docker,mesos
         mesosphere/mesos-slave:0.23.0-1.0.ubuntu1404
 ```
 
@@ -102,15 +112,15 @@ docker run
 * The resulting Docker run command roughly should look like this:
 
 ```
-   /usr/bin/docker run 
-        --name x-%p 
-        --net host 
-        --publish :8888:8888 
-        --env SERVICE_NAME=marathon 
-        --env SERVICE_TAGS=http 
+   /usr/bin/docker run
+        --name x-%p
+        --net host
+        --publish :8888:8888
+        --env SERVICE_NAME=marathon
+        --env SERVICE_TAGS=http
         mesosphere/marathon:v0.10.0  
-        --master $ZOOKEEPERS/mesos 
-        --zk $ZOOKEEPERS/marathon 
+        --master $ZOOKEEPERS/mesos
+        --zk $ZOOKEEPERS/marathon
         --http_port 8888
 ```
 
@@ -128,7 +138,8 @@ docker run
 # Create and start
 curl -s https://raw.githubusercontent.com/mvanholsteijn/paas-monitor/master/marathon.json | \
 	curl -d @- -X POST -H 'Content-Type: application/json' http://marathon.127.0.0.1.xip.io:8080/v2/apps
-
+```
+```
 # Update application
 curl -s https://raw.githubusercontent.com/mvanholsteijn/paas-monitor/master/marathon.json | \
 	sed -e  's/"RELEASE":.*/"RELEASE": "mesos-1.0",/'  |\
