@@ -127,6 +127,12 @@ docker run
 ### Hands-on: Typing instruction
 * typing Instruction:
 ```
+# Create and start
 curl -s https://raw.githubusercontent.com/mvanholsteijn/paas-monitor/master/marathon.json | \
-	curl -X POST http://marathon.127.0.0.1.xip.io:8080/v2/apps
+	curl -d @- -X POST -H 'Content-Type: application/json' http://marathon.127.0.0.1.xip.io:8080/v2/apps
+
+# Update application
+curl -s https://raw.githubusercontent.com/mvanholsteijn/paas-monitor/master/marathon.json | \
+	sed -e  's/"RELEASE":.*/"RELEASE": "mesos-1.0",/'  |\
+	curl -d @- -X PUT -H 'Content-Type: application/json' http://marathon.127.0.0.1.xip.io:8080/v2/apps/paas-monitor
 ```
