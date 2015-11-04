@@ -1,6 +1,6 @@
 ### Hands-on: Using Mesos and Marathon (Advanced)
 
-![Mesos Marathon setup](../images/mesos-marathon-setup.jpg) <!-- .element: class="noborder" -->
+![Mesos Marathon setup](images/mesos-marathon-setup.jpg) <!-- .element: class="noborder" -->
 
 !SUB
 ### Hands-on: Create a zookeeper unit
