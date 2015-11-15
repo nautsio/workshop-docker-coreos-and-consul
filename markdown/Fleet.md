@@ -95,10 +95,10 @@ open http://localhost:1337
 * specify minimal [Unit] and [Service] section.
 * expose all ports
 
+
 !NOTE
 [Unit]
 Description=paas-monitor
-
 [Service]
 ExecStart=/usr/bin/docker run -P mvanholsteijn/paas-monitor:latest
 
@@ -139,6 +139,7 @@ All submitted files can be viewed with list-unit-files. All loaded, started or s
 * explore the different unit states with commands destroy, submit, load.
 * what status of the unit in after a stop?
 
+
 !NOTE
 
 fleetctl start paas.service
@@ -170,7 +171,6 @@ SuccessExitStatus=12 13 SIGTERM
 !NOTE
 [Unit]
 Description=paas-monitor
-
 [Service]
 ExecStart=/usr/bin/docker run -P mvanholsteijn/paas-monitor:latest
 SuccessExitStatus=0 2
@@ -212,6 +212,7 @@ Default TimeoutStartSec is 90 seconds, which is sometimes to short for pulling l
 * add a restart policy to your paas-monitor.
 * Now kill the process. What happens?
 
+
 !NOTE
 [Unit]
 Description=paas-monitor
@@ -226,6 +227,7 @@ SuccessExitStatus=0 2
 ### Hands-on - Splitting pull from run
 
 * Modify your unit file to pull the image before starting the container.
+
 
 !NOTE
 [Unit]
@@ -254,6 +256,7 @@ fleetctl ssh <unit-name> - ssh into machine running <unit>
 * What are the machine id's of the machines in your cluster?
 * Kill the paas-monitor by logging in to the machine using fleetctl.
 
+
 !NOTE
 
 $ fleetctl list-machines
@@ -280,6 +283,7 @@ Global=           Select all machines in the cluster
 
 * Deploy paas-monitor on core-02 only.
 
+
 !NOTE
 Get the machine id of core-02
 
@@ -303,6 +307,7 @@ MachineID=<machine-id-core-02>
 * Deploy paas-monitor on all machines.
 * view the result on http://paas-monitor.127.0.0.1.xip.io:8080
 * If you use global=true what is the effect of fleetctl status and journal?
+
 
 !NOTE
 
@@ -363,8 +368,8 @@ fleetctl start paas-monitor@1.service
 * create a template file for paas-monitor.
 * start 4 instances of paas-monitor.
 
-!NOTE
 
+!NOTE
 [Unit]
 Description=paas-monitor
 [Service]
