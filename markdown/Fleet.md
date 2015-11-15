@@ -52,7 +52,8 @@ OnFailure=      services to activate, when this one fails
 RequiresMountsFor=  list of directories
 ```
 As you can see, you can obtain fine control over the service's dependencies.
-At a minimum, you should specify 'Description'.
+At a minimum, you should specify Description.
+
 
 !SUB
 ### Start/stop commands
@@ -71,6 +72,7 @@ Commands that exit with a non-zero exit causes the service to enter a failed sta
 ExecStartPre=- /usr/bin/docker pull myimage
 ```
 
+
 !SUB
 ### Introducing paas-monitor
 * [paas-monitor](https://github.com/mvanholsteijn/paas-monitor) is a Docker web application to explore the deployment behaviour of PaaS systems.
@@ -79,6 +81,7 @@ ExecStartPre=- /usr/bin/docker pull myimage
 /environment returns the environment of the instance
 /  starts a browser application that continuously calls /status and displays the results
 ```
+
 
 !SUB
 ### Hand-on: running paas-monitor stand alone
@@ -101,6 +104,7 @@ open http://localhost:1337
 Description=paas-monitor
 [Service]
 ExecStart=/usr/bin/docker run -P mvanholsteijn/paas-monitor:latest
+
 
 !SUB
 ### fleetctl 1/2
@@ -142,13 +146,14 @@ All submitted files can be viewed with list-unit-files. All loaded, started or s
 
 !NOTE
 
-fleetctl start paas.service
-open http://paas-monitor.127.0.0.1.xip.io:8080
-fleetctl stop paas.service
-state -> failed
-fleetctl destroy paas.service
-fleetctl submit paas.service
-fleetctl load paas.service
+$ fleetctl start paas.service
+$ open http://paas-monitor.127.0.0.1.xip.io:8080
+$ fleetctl stop paas.service
+$ fleetctl status paas.service ==> state -> failed
+$ fleetctl destroy paas.service
+$ fleetctl submit paas.service
+$ fleetctl load paas.service
+
 
 !SUB
 ### Successful exit status
@@ -262,9 +267,9 @@ fleetctl ssh <unit-name> - ssh into machine running <unit>
 !NOTE
 
 $ fleetctl list-machines
-$ fleetctl ssh paas <<!
+$ fleetctl ssh paas <<EOF
 ps -ef | grep /paas-monitor\$ | grep -v grep | awk '{print $2}' | xargs sudo kill -9
-!
+EOF
 
 
 
@@ -280,6 +285,8 @@ MachineMetadata=  Select a machine with matching metadata
 Conflicts=        Select a machine not running another unit (pattern)
 Global=           Select all machines in the cluster
 ```
+
+
 !SUB
 ### Hands-on - specific machine
 
@@ -324,6 +331,7 @@ SuccessExitStatus=0 2
 [X-Fleet]
 Global=true
 
+
 !SUB
 ### CoreOS systemd essential commands
 Fleet submits the units to a machine as normal systemd units.
@@ -335,6 +343,8 @@ journalctl         - show all log output
 journalctl -u      - show log output of a unit
 docker             - manage docker on local host
 ```
+
+
 !SUB
 ### hands-on: systemd commands
 * login to a machine running  paas-monitor.
@@ -363,6 +373,7 @@ $ journalctl -u paas-monitor
 fleetctl submit paas-monitor@.service
 fleetctl start paas-monitor@1.service
 ```
+
 
 !SUB
 ### Hands-on: paas-monitor template
@@ -400,6 +411,7 @@ In unit files you can reference meta information about the unit through specifie
 | %H | host name running the unit |
 | %% | percent character |
 
+
 !SUB
 ### Hands-on: matching Docker container names with unit names
 
@@ -416,6 +428,7 @@ ExecStartPre=-/usr/bin/docker rm -f %p-%i
 ExecStartPre=/usr/bin/docker pull mvanholsteijn/paas-monitor:latest
 ExecStart=/usr/bin/docker run --name %p-%i -P mvanholsteijn/paas-monitor:latest
 SuccessExitStatus=0 2
+
 
 !SUB
 ### Fleet Docker unit files
@@ -438,6 +451,7 @@ ExecStop=/usr/bin/docker stop %p-%i
 SuccessExitStatus=0 SIGTERM
 
 ```
+
 
 !SUB
 ### Environment settings
@@ -464,6 +478,7 @@ Shell substitution is not supported. If required, you need to start a shell your
 [Service]
 ExecStart=/bin/sh -c 'exec /bin/echo $(date)'
 ```
+
 
 !SUB
 ### Killing remaining processes
