@@ -1,4 +1,4 @@
-## Fleet
+## Hands-on Fleet
 ![CoreOS fleet](images/fleet-overview.png) <!-- .element: class="noborder" -->
 
 
