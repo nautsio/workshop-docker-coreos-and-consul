@@ -1,6 +1,7 @@
 ## Fleet
 ![CoreOS fleet](images/fleet-overview.png) <!-- .element: class="noborder" -->
 
+
 !SUB
 ### Fleet
 * Distributed init system on top of etcd
@@ -8,7 +9,6 @@
 * Maintains required number of instances of a service
 * Discover machines running in the cluster
 
-Fleet supports a number of different (systemd) unit files, allowing you to create complex applications.
 
 !SUB
 ### Supported systemd unit types
