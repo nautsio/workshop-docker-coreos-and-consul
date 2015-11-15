@@ -98,7 +98,7 @@ ExecStartPre=- /usr/bin/docker pull myimage
 
 !SUB
 ### Introducing paas-monitor
-* (paas-monitor)[https://github.com/mvanholsteijn/paas-monitor] is a Docker web application to explore the deployment behaviour of PaaS systems.
+* [paas-monitor](https://github.com/mvanholsteijn/paas-monitor) is a Docker web application to explore the deployment behaviour of PaaS systems.
 * /status returns information about the instance
 * /environment returns the environment of the instance
 * / starts a browser application that continuously calls /status and displays the results in an HTML table
@@ -107,18 +107,18 @@ ExecStartPre=- /usr/bin/docker pull myimage
 
 !SUB
 ### Hands-on creating paas-monitor.service
-* create a fleet unit service file, for  (mvanholsteijn/paas-monitor:latest)[https://github.com/mvanholsteijn/paas-monitor]
+* create a fleet unit service file, for  [mvanholsteijn/paas-monitor:latest](https://github.com/mvanholsteijn/paas-monitor)
 * specify [Unit] description, [Service] ExecStartPre and ExecStart commands.
 * expose all ports
 
 !SUB
 ### Hands-on - create a service unit
-* create a fleet unit service file, for  (mvanholsteijn/paas-monitor:latest)[https://github.com/mvanholsteijn/paas-monitor]
+* create a fleet unit service file, for  [mvanholsteijn/paas-monitor:latest](https://github.com/mvanholsteijn/paas-monitor)
 * specify [Unit] description, [Service] ExecStartPre and ExecStart commands.
 * expose all ports
 
 !SUB
-### Controlling fleet unit files
+### fleetctl 1/2
 fleetctl is the application for controlling fleet unit files.
 ```
 fleetctl submit          - sends a unit file to the cluster
@@ -127,16 +127,23 @@ fleetctl start           - request systemd to start the unit
 fleetctl stop            - request systemd to stop unit
 fleetctl destroy         - stops and removes the unit file
 fleetctl status          - shows the status of a unit
+```
+submits only sends the unit files into etcd.
+load assigns a unit file to a specific machine.
+start/stop will actually request systemd to start/stop the unit.
+You cannot update units. You must destroy and recreate.
+
+!SUB
+### fleetctl 2/2
+fleetctl is the application for controlling fleet unit files.
+```
 fleetctl cat             - shows the unit file
 fleetctl journal         - show unit journals
 fleetctl list-units      - lists all active units
 fleetctl list-unit-files - lists all unit files
 ```
-submits only sends the unit files into etcd. All submitted files can be viewed with list-unit-files.
-load assigns a unit file to a specific machine.
-start/stop will actually request systemd to start/stop the unit. All loaded, started or stopped units can be seen using list-units. status will show the status of an instance.
-As all output of the services is captured by journald, you can view stdout and stderr with fleetctl journal.
-You cannot update units. You must destroy and recreate.
+All submitted files can be viewed with list-unit-files. All loaded, started or stopped units can be seen using list-units. status will show the status of an instance. As all output of the services is captured by journald, you can view stdout and stderr with fleetctl journal.
+
 
 !SUB
 ### Hands-on - start/stop a service unit
@@ -173,6 +180,9 @@ As you may have noticed, services are not automatically restarted. You need to s
 [Service]
 Restart=          [no, always, on-success, on-failure, on-abnormal or on-abort]
 ```
+Our advise for docker containers: **always**.
+
+### Restart policy options
 |Restart settings/Exit causes|no|always|on-success|on-failure|on-abnormal|on-abort|
 |----------------------------|--|------|----------|----------|-----------|--------|
 |Clean exit code or signal| |X|X| | |
@@ -180,7 +190,6 @@ Restart=          [no, always, on-success, on-failure, on-abnormal or on-abort]
 |Unclean signal| |X| |X|X|
 |Timeout| |X| |X|X|
 
-Our advise for docker containers: always.
 
 !SUB
 ### Restart timeouts
@@ -270,7 +279,7 @@ docker             - manage docker on local host
 * after submitting a template file, you can start load/start instances.
 
 ```
-fleetctl paas-monitor@.service
+fleetctl submit paas-monitor@.service
 fleetctl start paas-monitor@1.service
 ```
 
