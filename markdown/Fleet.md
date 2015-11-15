@@ -88,18 +88,21 @@ docker run -p :1337:1337 mvanholsteijn/paas-monitor
 open http://localhost:1337
 ```
 
+
 !SUB
 ### Hands-on creating paas-monitor.service
 * create a fleet unit service file, for  [mvanholsteijn/paas-monitor:latest](https://github.com/mvanholsteijn/paas-monitor)
-* specify [Unit] description, [Service] ExecStartPre and ExecStart commands.
+* specify minimal [Unit] and [Service] section.
 * expose all ports
 
-!SUB
-### Hands-on - create a service unit
-* create a fleet unit service file, for  [mvanholsteijn/paas-monitor:latest](https://github.com/mvanholsteijn/paas-monitor)
-* specify [Unit] description, [Service] ExecStartPre and ExecStart commands.
-* expose all ports
+!NOTE
+```
+[Unit]
+Description=paas-monitor
 
+[Service]
+ExecStart=/usr/bin/docker run -P mvanholsteijn/paas-monitor:latest
+```
 !SUB
 ### fleetctl 1/2
 fleetctl is the application for controlling fleet unit files.
@@ -137,6 +140,17 @@ All submitted files can be viewed with list-unit-files. All loaded, started or s
 * explore the different unit states with commands destroy, submit, load.
 * what status of the unit in after a stop?
 
+!NOTE
+```
+fleetctl start paas.service
+open http://paas-monitor.127.0.0.1.xip.io:8080
+fleetctl stop paas.service
+state -> failed
+fleetctl destroy paas.service
+fleetctl submit paas.service
+fleetctl load paas.service
+```
+
 !SUB
 ### Successful exit status
 As you may have noticed, a process that exits with a non-zero status is put in the state failed.
@@ -154,6 +168,16 @@ SuccessExitStatus=12 13 SIGTERM
 * If correct, the unit will reach 'dead' state on stop.
 * What happens if you kill the paas-monitor with SIGKILL?
 
+
+!NOTE
+```
+[Unit]
+Description=paas-monitor
+
+[Service]
+ExecStart=/usr/bin/docker run -P mvanholsteijn/paas-monitor:latest
+SuccessExitStatus=0 2
+```
 
 !SUB
 ### Restart policy
@@ -191,10 +215,34 @@ Default TimeoutStartSec is 90 seconds, which is sometimes to short for pulling l
 * add a restart policy to your paas-monitor.
 * Now kill the process. What happens?
 
+!NOTE
+```
+[Unit]
+Description=paas-monitor
+
+[Service]
+Restart=always
+RestartSec=5
+ExecStart=/usr/bin/docker run -P mvanholsteijn/paas-monitor:latest
+SuccessExitStatus=0 2
+```
 !SUB
 ### Hands-on - Splitting pull from run
 
 * Modify your unit file to pull the image before starting the container.
+
+!NOTE
+```
+[Unit]
+Description=paas-monitor
+
+[Service]
+Restart=always
+RestartSec=5
+ExecStartPre=/usr/bin/docker pull mvanholsteijn/paas-monitor:latest
+ExecStart=/usr/bin/docker run -P mvanholsteijn/paas-monitor:latest
+SuccessExitStatus=0 2
+```
 
 !SUB
 ### Fleetctl machine commands
@@ -211,6 +259,14 @@ fleetctl ssh <unit-name> - ssh into machine running <unit>
 * What are the machine id's of the machines in your cluster?
 * Kill the paas-monitor by logging in to the machine using fleetctl.
 
+!NOTE
+```
+$ fleetctl list-machines
+$ fleetctl ssh paas <<!
+ps -ef | grep /paas-monitor\$ | grep -v grep | awk '{print $2}' | xargs sudo kill -9
+!
+```
+
 
 !SUB
 ### Fleet specific options
@@ -224,14 +280,53 @@ MachineMetadata=  Select a machine with matching metadata
 Conflicts=        Select a machine not running another unit (pattern)
 Global=           Select all machines in the cluster
 ```
-
 !SUB
-### Hands-on - machines
+### Hands-on - specific machine
 
 * Deploy paas-monitor on core-02 only.
+
+!NOTE
+Get the machine id of core-02
+```
+$(fleetctl list-machines -no-legend -fields=machine,ip -full | grep 172.17.8.102 | awk '{print $1}')
+```
+```
+[Unit]
+Description=paas-monitor
+
+[Service]
+Restart=always
+RestartSec=5
+ExecStartPre=/usr/bin/docker pull mvanholsteijn/paas-monitor:latest
+ExecStart=/usr/bin/docker run -P mvanholsteijn/paas-monitor:latest
+SuccessExitStatus=0 2
+
+[X-Fleet]
+MachineID=<machine-id-core-02>
+```
+
+!SUB
+### Hands-on - global unit
+
 * Deploy paas-monitor on all machines.
 * view the result on http://paas-monitor.127.0.0.1.xip.io:8080
 * If you use global=true what is the effect of fleetctl status and journal?
+
+!NOTE
+```
+[Unit]
+Description=paas-monitor
+
+[Service]
+Restart=always
+RestartSec=5
+ExecStartPre=/usr/bin/docker pull mvanholsteijn/paas-monitor:latest
+ExecStart=/usr/bin/docker run -P mvanholsteijn/paas-monitor:latest
+SuccessExitStatus=0 2
+
+[X-Fleet]
+Global=true
+```
 
 !SUB
 ### CoreOS systemd essential commands
@@ -246,12 +341,19 @@ docker             - manage docker on local host
 ```
 !SUB
 ### hands-on: systemd commands
-* login to the machine running a global paas-monitor.
+* login to a machine running  paas-monitor.
 * Inspect the status of paas-monitor.
 * Inspect the systemd unit file
 * use journalctl to inspect the logs.
 * How are the output of systemctl and journalctl different from fleetctl?
 
+
+!NOTE
+```
+systemctl status paas-monitor
+systemctl cat paas-monitor
+journalctl -u paas-monitor
+```
 
 !SUB
 ### Template files
@@ -272,6 +374,24 @@ fleetctl start paas-monitor@1.service
 * create a template file for paas-monitor.
 * start 4 instances of paas-monitor.
 
+!NOTE
+```
+[Unit]
+Description=paas-monitor
+
+[Service]
+Restart=always
+RestartSec=5
+ExecStartPre=/usr/bin/docker pull mvanholsteijn/paas-monitor:latest
+ExecStart=/usr/bin/docker run -P mvanholsteijn/paas-monitor:latest
+SuccessExitStatus=0 2
+```
+commands:
+```
+fleetctl submit paas-monitor@.service
+fleetctl load paas-monitor@{1..4}
+fleetctl start paas-monitor@{1..4}
+```
 
 !SUB
 ### Unit file specifiers
@@ -290,6 +410,19 @@ In unit files you can reference meta information about the unit through specifie
 
 * Modify your unit file to match the docker instance container name with the fleet unit name.
 
+!NOTE
+```
+[Unit]
+Description=paas-monitor
+
+[Service]
+Restart=always
+RestartSec=5
+ExecStartPre=-/usr/bin/docker rm -f %p-%i
+ExecStartPre=/usr/bin/docker pull mvanholsteijn/paas-monitor:latest
+ExecStart=/usr/bin/docker run --name %p-%i -P mvanholsteijn/paas-monitor:latest
+SuccessExitStatus=0 2
+```
 
 !SUB
 ### Fleet Docker unit files
