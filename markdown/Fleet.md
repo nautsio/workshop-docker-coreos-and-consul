@@ -359,8 +359,11 @@ SendSIGHUP=	  yes/**no**
 KillMode is used to determine the kill behavior for the service processes. The default is control-group, which is fine for Docker containers.
 ```
 [Service]
-KillMode=	    mode of killing processes still running after stop command
+KillMode=	    one of control-group, process, mixed or none
 ```
+
+!SUB
+### Kill Mode options
 
 |KillMode|description|
 |--------|-----------|
