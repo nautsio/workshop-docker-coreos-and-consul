@@ -186,6 +186,8 @@ Restart=          [no, always, on-success, on-failure, on-abnormal or on-abort]
 ```
 Our advise for docker containers: **always**.
 
+
+!SUB
 ### Restart policy options
 |Restart settings/Exit causes|no|always|on-success|on-failure|on-abnormal|on-abort|
 |----------------------------|--|------|----------|----------|-----------|--------|
