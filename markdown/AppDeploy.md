@@ -44,7 +44,8 @@ fleetctl list-units | grep paas-monitor
 
 !NOTE
 ### Hands-on: typing instructions
-```shell
+
+```
 # Mimic a new release of the template 
 sed -i -e 's/--env RELEASE=[^ ]*/--env RELEASE=v2/'  paas-monitor\@.service
 
