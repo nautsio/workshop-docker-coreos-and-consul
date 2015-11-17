@@ -3,36 +3,18 @@
 
 
 !SUB
-## Consul introduction
+## Consul - Service Discovery
 
-Consul is a tool for discovering and configuring services in your infrastructure
-
-
+The platform uses consul, the registrator and consul templates for service discovery and default HTTP router.
+Unfamiliar with these components? Do the workshop [Service discovery with Consul](http://nauts.io/workshop-docker-consul) first.
 [_consul.io_](http://www.consul.io)
 
 
 !SUB
-### Consul Features
-
- - Service discovery
- - Health checking
- - Key value store
- - Multi-datacenter
-
-
-!SUB
-
-### Consul works with
-
- - Peer to peer networking
- - Gossip protocol (Serf)
- - An agent per node
- - A DNS interface (compatibility)
- - A REST interface (rich API)
-
-!SUB
 
 ### Why Consul instead of etcd?
+
+Consul provides a very non-intrusive way of integrating dynamic service discovery with well-known infrastructure components.
 
  - DNS interface 
  - developer utilities
