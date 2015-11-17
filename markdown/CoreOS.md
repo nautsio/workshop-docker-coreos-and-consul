@@ -11,7 +11,7 @@ Linux for Massive Server Deployments
 ### CoreOS Overview
 ![CoreOS features](images/coreos-overview.png) <!-- .element: class="noborder" -->
 
-!SLIDE
+!SUB
 ### Docker
 <img src="images/docker.svg" class="header">
 
