@@ -41,25 +41,28 @@ fleetctl list-units | grep paas-monitor
 * perform a rolling upgrade using fleetctl
 * continuously watch the monitor!
 
+
 !NOTE
 ### Hands-on: typing instructions
-#### Mimic a new release of the template 
+```shell
+# Mimic a new release of the template 
 sed -i -e 's/--env RELEASE=[^ ]*/--env RELEASE=v2/'  paas-monitor\@.service
 
-#### Destroy the old and submit new unit template file 
+# Destroy the old and submit new unit template file 
 fleetctl destroy paas-monitor@.service
 fleetctl submit paas-monitor@.service
 
-#### Load 6 new instances of the paas-monitor
+# Load 6 new instances of the paas-monitor
 fleetctl load paas-monitor@{1..6}-v2.service
 
-#### Start 6 new instances of the paas-monitor 
+# Start 6 new instances of the paas-monitor 
 fleetctl start paas-monitor@{1..6}-v2.service
 
-#### List stop and destroy the original 6 instances
+# List stop and destroy the original 6 instances
 fleetctl list-units | grep 'paas-monitor\@[1-6]-v2.service' | grep running
 fleetctl stop paas-monitor@{1..6}.service
 fleetctl destroy paas-monitor@{1..6}.service
+```
 
 !SLIDE
 ## Hands-on: killing an instance
