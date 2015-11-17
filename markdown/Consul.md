@@ -5,9 +5,9 @@
 !SUB
 ## Consul - Service Discovery
 
-The platform uses consul, the registrator and consul templates for service discovery and default HTTP router.
+The platform uses [consul](http://www.consul.io), the [registrator](http://gliderlabs.com/registrator/latest/user/quickstart/#quickstart) and [consul template](https://github.com/hashicorp/consul-template) for service discovery and default HTTP router.  
+
 Unfamiliar with these components? Do the workshop [Service discovery with Consul](http://nauts.io/workshop-docker-consul) first.
-[_consul.io_](http://www.consul.io)
 
 
 !SUB
