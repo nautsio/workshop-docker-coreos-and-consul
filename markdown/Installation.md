@@ -3,11 +3,23 @@
 http://nauts.io/workshop-docker-coreos-and-consul
 
 !SUB
+### Note
++ The hands-on instructions will ask you to achieve something, without giving you direct typing instructions
++ explore and try to find out how to do it
++ In case of emergency, consult speaker notes by pressing s
+
+!NOTE
+Indeed, like this. You may find exact typing
+instructions and/or file snippets.
+
+!SUB
 ### Prerequisites
 + [Git] [+ GitBash for Windows]
 + [VirtualBox] 4.3.10 or greater.
 + [Vagrant] 1.6 or greater.
 + fleetctl installed.
+
+
 
 !SUB
 ### Hands-on: Start the cluster
@@ -53,6 +65,7 @@ consul-server.service                   9b969332.../172.17.8.101        active  
 consul-server.service                   dd9eb383.../172.17.8.103        active  running
 ```
 
+
 !SLIDE
 ## Hands-on: checkout the Consul Console
 
@@ -63,9 +76,9 @@ consul-server.service                   dd9eb383.../172.17.8.103        active  
 * setup a tunnel and navigate to http://localhost:8500
 * how many instances of the consul-dns service do you see running?
 
-!SUB
-### Hands-on: typing instruction
-```
+!NOTE
+\# Typing instruction
+```bash
 vagrant ssh core-01 -- -A -L8500:172.17.8.101:8500
 open http://127.0.0.1:8500
 ```
@@ -81,5 +94,8 @@ open http://127.0.0.1:8500
 * how many backends are registered?
 
 !NOTE
+\# Typing instructions
+```bash
 vagrant ssh core-01 -- docker exec consul-http-router cat /nginx.ctmpl
 vagrant ssh core-01 -- docker exec consul-http-router cat /etc/nginx/nginx.conf
+```

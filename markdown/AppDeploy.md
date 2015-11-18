@@ -3,7 +3,7 @@
 !SUB
 ### Hands-on: Deploy Application
 * Deploy 6 instances of the paas-monitor using fleetctl and this unit file --> [paas-monitor@.service](https://raw.githubusercontent.com/mvanholsteijn/coreos-container-platform-as-a-service/master/fleet-units/paas-monitor/paas-monitor%40.service)  
-* Open http://paas-monitor.127.0.0.1.xip.io:8080 
+* Open http://paas-monitor.127.0.0.1.xip.io:8080
 
 ```
        host               rel      message                   #C       ART     LRT
@@ -17,20 +17,21 @@
 
 
 !NOTE
-### Hands-on: typing instructions
 
-#### Submit the paas-monitor template
+\# Typing instructions
+```bash
+\# Submit the paas-monitor template
 fleetctl submit paas-monitor@.service
 
-#### Load the paas-monitor app
+\# Load the paas-monitor app
 fleetctl load paas-monitor@{1..6}.service
 
-#### Start the paas-monitor app
+\# Start the paas-monitor app
 fleetctl start paas-monitor@{1..6}.service
 
-#### Check the status of the paas-monitor app
+\# Check the status of the paas-monitor app
 fleetctl list-units | grep paas-monitor
-
+```
 
 !SLIDE
 ## Hands-on: Rolling upgrade
@@ -43,20 +44,22 @@ fleetctl list-units | grep paas-monitor
 
 
 !NOTE
-### Hands-on: typing instructions
 
-```
-\# Mimic a new release of the template 
+\# Typing instructions
+```bash
+
+
+\# Mimic a new release of the template
 sed -i -e 's/--env RELEASE=[^ ]*/--env RELEASE=v2/'  paas-monitor\@.service
 
-\# Destroy the old and submit new unit template file 
+\# Destroy the old and submit new unit template file
 fleetctl destroy paas-monitor@.service
 fleetctl submit paas-monitor@.service
 
 \# Load 6 new instances of the paas-monitor
 fleetctl load paas-monitor@{1..6}-v2.service
 
-\# Start 6 new instances of the paas-monitor 
+\# Start 6 new instances of the paas-monitor
 fleetctl start paas-monitor@{1..6}-v2.service
 
 \# List stop and destroy the original 6 instances
@@ -75,11 +78,14 @@ fleetctl destroy paas-monitor@{1..6}.service
 * watch the paas-monitor. What happens?
 
 !NOTE
-### Hands-on: typing instructions
-# in seperate window
+
+\# Typing instructions
+```bash
+\# in separate window
 open http://paas-monitor.127.0.0.1.xip.io:8080
 vagrant ssh core-01 --  docker events'
 vagrant ssh core-01 --  'docker kill $(docker ps | grep paas-monitor | awk "{ print \$NF;}" | head -1 ) '
+```
 
 !SLIDE
 ## Hands-on: killing a machine
@@ -90,6 +96,9 @@ vagrant ssh core-01 --  'docker kill $(docker ps | grep paas-monitor | awk "{ pr
 * watch the paas-monitor. What happens?
 
 !NOTE
-### Hands-on: typing instructions
+
+\# Typing instructions
+```bash
 open http://paas-monitor.127.0.0.1.xip.io:8080
 vagrant ssh core-03 --  sudo shutdown -h now'
+```
