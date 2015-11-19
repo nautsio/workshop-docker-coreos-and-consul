@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
         <link rel="stylesheet" href="{{ site.cdn }}/reveal.js/css/reveal.css">
-        <link rel="stylesheet" href="{{ site.cdn }}/css/presentation.css" id="theme">
+        <link rel="stylesheet" href="{{ site.cdn }}/css/workshop.css" id="theme">
 
         <!-- Code syntax highlighting -->
         <link rel="stylesheet" href="{{ site.cdn }}/css/highlightjs-tomorrow.css">
@@ -46,26 +46,22 @@
         <div class="reveal">
             <!-- Any section element inside of this container is displayed as a slide -->
             <div class="slides">
-                <section>
-                <script type="text/template">
-                    <!-- .slide: data-background="#ff0000" -->
-
-                    </script>
-                    <h1>A high available docker container platform</h1>
-                    <h3>Using CoreOS and Consul</h3>
-                    <p>
-                        <small>Created by Mark van Holsteijn, Thomas Kruitbosch & Adé Mochtar</small>
-                    </p>
-                    <p>
-                        <small>April 2015</small>
-                    </p>
+                <section data-markdown="title.md"
+                    data-separator="^\n!SLIDE"
+                    data-separator-vertical="^\n!SUB"
+                    data-notes="^\n!NOTE"
+                    data-charset="iso-8859-15">
+                </section>
+                <section data-markdown="{{ site.cdn }}/nauts.md"
+                    data-separator="^\n!SLIDE"
+                    data-separator-vertical="^\n!SUB"
+                    data-notes="^\n!NOTE"
+                    data-charset="iso-8859-15">
                 </section>
                 <section data-markdown="markdown/Intro.md"
-                    data-transition="slide"
-                    data-background-transition="zoom"
-                    data-separator="^\n\n\n"
-                    data-separator-vertical="^\n\n"
-                    data-separator-notes="^Note:"
+                    data-separator="^\n!SLIDE"
+                    data-separator-vertical="^\n!SUB"
+                    data-separator-notes="^\n!NOTE"
                     data-charset="iso-8859-15">
                 </section>
                 <section data-markdown="markdown/DockerVsPlatform.md"

@@ -3,6 +3,7 @@
 
 
 !SUB
+<!-- .element: class="center" -->
 ### CoreOS Features
 Linux for Massive Server Deployments
 ![CoreOS features](images/coreos-features.png) <!-- .element: class="noborder" -->
@@ -12,6 +13,7 @@ Linux for Massive Server Deployments
 ![CoreOS features](images/coreos-overview.png) <!-- .element: class="noborder" -->
 
 !SUB
+<!-- .element: class="center" -->
 ### Docker
 <img src="images/docker.svg" class="header">
 

@@ -1,9 +1,9 @@
-## Hands-on: Installation
+# Hands-on: Installation
 
 http://nauts.io/workshop-docker-coreos-and-consul
 
 !SUB
-### Note
+## Note
 + The hands-on instructions will ask you to achieve something, without giving you direct typing instructions
 + explore and try to find out how to do it
 + In case of emergency, consult speaker notes by pressing s
@@ -13,16 +13,14 @@ Indeed, like this. You may find exact typing
 instructions and/or file snippets.
 
 !SUB
-### Prerequisites
+## Prerequisites
 + [Git] [+ GitBash for Windows]
 + [VirtualBox] 4.3.10 or greater.
 + [Vagrant] 1.6 or greater.
 + fleetctl installed.
 
-
-
 !SUB
-### Hands-on: Start the cluster
+## Hands-on: Start the cluster
 ```
 git clone \
   https://github.com/mvanholsteijn/coreos-container-platform-as-a-service.git
@@ -33,7 +31,7 @@ vagrant up
 ```
 
 !SUB
-### Hands-on: Setup ssh and list machines with fleetctl
+## Hands-on: Setup ssh and list machines with fleetctl
 
 ```
 brew install fleetctl
@@ -45,7 +43,7 @@ fleetctl list-machines
 ```
 
 !SUB
-### Hands-on: Verify the installation
+## Hands-on: Verify the installation
 
 * use fleetctl to check that all services are running
 ```
@@ -67,12 +65,13 @@ consul-server.service                   dd9eb383.../172.17.8.103        active  
 
 
 !SLIDE
-## Hands-on: checkout the Consul Console
+# Hands-on: checkout Consul UI
 
 !SUB
+## Consul UI
 ![consul-console](images/consul-console.png)
 
-* the consul console is listening on port 8500 on each machine
+* the Consul UI is listening on port 8500 on each machine
 * setup a tunnel and navigate to http://localhost:8500
 * how many instances of the consul-dns service do you see running?
 
@@ -84,7 +83,7 @@ open http://127.0.0.1:8500
 ```
 
 !SLIDE
-### Hands-on: Checkout Consul Template
+# Hands-on: Checkout Consul Template
 
 !SUB
 ## Hands-on: Checkout the NGiNX configuration

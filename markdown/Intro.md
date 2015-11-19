@@ -1,4 +1,4 @@
-### Agenda
+# Menu for today
 * Theory
     * Docker vs Platform
     * CoreOS
