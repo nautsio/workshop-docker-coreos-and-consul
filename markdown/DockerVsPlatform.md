@@ -1,12 +1,13 @@
-## Docker is not enough!
-<img src="images/docker.svg" class="header">
+# Docker is not enough!
 
 !SUB
 ##  Containers are just containers
+We're missing:
 * Application Deployments
 * High Availability
 * Monitoring
 * Management & Logging
+* ...
 
 !SUB
 ##  You need a complete eco-system!

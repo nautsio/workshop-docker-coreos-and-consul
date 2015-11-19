@@ -1,6 +1,7 @@
-# Hands-on: Monitoring
+## Hands-on
+# Monitoring
 
 !SUB
-## Hands-on: Monitoring
+## DataDog
 * Install the DataDog agent as a CoreOS unit
 * https://www.datadoghq.com/2014/08/monitor-coreos-scale-datadog/

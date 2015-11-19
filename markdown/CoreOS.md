@@ -1,30 +1,40 @@
-### CoreOS
-<img src="images/coreos.svg" class="header">
-
+![CoreOS logo](images/coreos.svg)
+# CoreOS
 
 !SUB
 <!-- .element: class="center" -->
-### CoreOS Features
+## CoreOS Features
 Linux for Massive Server Deployments
-![CoreOS features](images/coreos-features.png) <!-- .element: class="noborder" -->
+![CoreOS features](images/coreos-features.png)
 
 !SUB
-### CoreOS Overview
-![CoreOS features](images/coreos-overview.png) <!-- .element: class="noborder" -->
+## CoreOS Overview
+![CoreOS features](images/coreos-overview.png)
 
 !SUB
 <!-- .element: class="center" -->
-### Docker
-<img src="images/docker.svg" class="header">
-
-The only way to install and run stuff on CoreOS!
+## The only way to run stuff on CoreOS: Docker
+![Docker logo](images/docker.svg)
 
 
 !SLIDE
-### Fleet
-![CoreOS fleet](images/fleet-overview.png) <!-- .element: class="noborder" -->
+![CoreOS fleet](images/fleet-overview.png)
+# Fleet
 
-* Distributed init system on top of etcd
+!SUB
+## Fleet features
+* Basically a distributed SystemD/init system
 * Distribute services across a cluster
 * Maintains required number of instances of a service
 * Discover machines running in the cluster
+* Easy way to SSH into the machine running a job
+
+[_coreos.com/fleet_](https://coreos.com/fleet)
+
+!SUB 
+## Fleet uses
+* SystemD like unit files for service definitions
+* [etcd](https://coreos.com/etcd) distributed key/value store
+* Consists of the an engine and agents
+
+[_coreos.com/fleet_](https://coreos.com/fleet)

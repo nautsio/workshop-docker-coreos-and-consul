@@ -1,26 +1,14 @@
-# Hands-on: Installation
-
-http://nauts.io/workshop-docker-coreos-and-consul
-
-!SUB
-## Note
-+ The hands-on instructions will ask you to achieve something, without giving you direct typing instructions
-+ explore and try to find out how to do it
-+ In case of emergency, consult speaker notes by pressing s
-
-!NOTE
-Indeed, like this. You may find exact typing
-instructions and/or file snippets.
+# Setup
 
 !SUB
 ## Prerequisites
-+ [Git] [+ GitBash for Windows]
-+ [VirtualBox] 4.3.10 or greater.
-+ [Vagrant] 1.6 or greater.
-+ fleetctl installed.
++ [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
++ [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (4.3.10+)
++ [Vagrant](https://docs.vagrantup.com/v2/installation/index.html) (1.6+)
++ `fleetctl` installed
 
 !SUB
-## Hands-on: Start the cluster
+## Start the cluster
 ```
 git clone \
   https://github.com/mvanholsteijn/coreos-container-platform-as-a-service.git
@@ -31,7 +19,7 @@ vagrant up
 ```
 
 !SUB
-## Hands-on: Setup ssh and list machines with fleetctl
+## Setup ssh and list machines with fleetctl
 
 ```
 brew install fleetctl
@@ -43,7 +31,7 @@ fleetctl list-machines
 ```
 
 !SUB
-## Hands-on: Verify the installation
+## Verify the installation
 
 * use fleetctl to check that all services are running
 ```
@@ -65,7 +53,7 @@ consul-server.service                   dd9eb383.../172.17.8.103        active  
 
 
 !SLIDE
-# Hands-on: checkout Consul UI
+# checkout Consul UI
 
 !SUB
 ## Consul UI

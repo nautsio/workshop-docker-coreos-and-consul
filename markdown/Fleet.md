@@ -1,12 +1,6 @@
-# Hands-on Fleet
 ![CoreOS fleet](images/fleet-overview.png) <!-- .element: class="noborder" -->
-
-!SUB
-## Fleet
-* Distributed init system on top of etcd
-* Distribute services across a cluster
-* Maintains required number of instances of a service
-* Discover machines running in the cluster
+## Hands-on
+# Fleet
 
 !SUB
 ## Supported systemd unit types
@@ -79,7 +73,7 @@ ExecStartPre=- /usr/bin/docker pull myimage
 ```
 
 !SUB
-## Hands-on: running paas-monitor stand alone
+## Running paas-monitor stand alone
 To see the paas-monitor in application
 ```
 docker run -p :1337:1337 mvanholsteijn/paas-monitor
@@ -87,11 +81,10 @@ open http://localhost:1337
 ```
 
 !SUB
-## Hands-on creating paas-monitor.service
+## Creating `paas-monitor.service`
 * create a fleet unit service file, for  [mvanholsteijn/paas-monitor:latest](https://github.com/mvanholsteijn/paas-monitor)
 * specify minimal [Unit] and [Service] section.
 * expose all ports
-
 
 !NOTE
 \# paas-monitor.service
@@ -131,7 +124,7 @@ All submitted files can be viewed with list-unit-files. All loaded, started or s
 
 
 !SUB
-## Hands-on - start/stop a service unit
+## Start/stop a service unit
 * start the paas-monitor using fleetctl
 * view the service by [paas-monitor.127.0.0.1.xip.io:8080](http://paas-monitor.127.0.0.1.xip.io:8080)
 * stop the paas-monitor. Check the state.
@@ -166,7 +159,7 @@ SuccessExitStatus=12 13 SIGTERM
 ```
 
 !SUB
-## Hands-on - determine success exit status
+## Determine success exit status
 
 * add SuccessExitStatus to the paas-monitor unit.
 * If correct, the unit will reach 'dead' state on stop.
@@ -196,10 +189,10 @@ Our advise for docker containers: **always**.
 ## Restart policy options
 |Restart settings/Exit causes|no|always|on-success|on-failure|on-abnormal|on-abort|
 |----------------------------|--|------|----------|----------|-----------|--------|
-|Clean exit code or signal| |X|X| | |
-|Unclean exit code| |X| |X| |
-|Unclean signal| |X| |X|X|
-|Timeout| |X| |X|X|
+|Clean exit code or signal| |X|X| | | |
+|Unclean exit code| |X| |X| | |
+|Unclean signal| |X| |X|X| |
+|Timeout| |X| |X|X| |
 
 !SUB
 ## Restart timeouts
@@ -213,8 +206,8 @@ TimeoutStartSec=  timeout on start
 Default TimeoutStartSec is 90 seconds, which is sometimes to short for pulling large docker images or pulling a large number of concurrent images.
 
 !SUB
-## Hands-on - restart policy
-* add a restart policy to your paas-monitor.
+## Restart policy
+* Add a restart policy to your paas-monitor.
 * Now kill the process. What happens?
 
 !NOTE
@@ -231,7 +224,7 @@ SuccessExitStatus=0 2
 ```
 
 !SUB
-## Hands-on - Splitting pull from run
+## Splitting pull from run
 * Modify your unit file to pull the image before starting the container.
 
 !NOTE
@@ -258,7 +251,7 @@ fleetctl ssh <unit-name> - ssh into machine running <unit>
 ```
 
 !SUB
-## Hands-on - machines
+## Machines
 * What are the machine ids of the machines in your cluster?
 * Kill the paas-monitor by logging in to the machine using fleetctl.
 
@@ -285,7 +278,7 @@ Global=           Select all machines in the cluster
 ```
 
 !SUB
-## Hands-on - specific machine
+## Specific machine
 * Deploy paas-monitor on core-02 only.
 
 !NOTE
@@ -294,7 +287,6 @@ Global=           Select all machines in the cluster
 \# Get the machine id of core-02
 $(fleetctl list-machines -no-legend -fields=machine,ip -full | grep 172.17.8.102 | awk '{print $1}')
 ```
-
 \# paas-monitor.service
 ```
 [Unit]
@@ -310,7 +302,7 @@ MachineID=<machine-id-core-02>
 ```
 
 !SUB
-## Hands-on - global unit
+## Global unit
 * Deploy paas-monitor on all machines.
 * view the result on http://paas-monitor.127.0.0.1.xip.io:8080
 * If you use global=true what is the effect of fleetctl status and journal?
@@ -343,7 +335,7 @@ docker             - manage docker on local host
 ```
 
 !SUB
-## hands-on: systemd commands
+## Systemd commands
 * login to a machine running  paas-monitor.
 * Inspect the status of paas-monitor.
 * Inspect the systemd unit file
@@ -355,7 +347,6 @@ docker             - manage docker on local host
 ```bash
 \# Login to the first machine
 fleetctl ssh $(fleetctl list-machines -no-legend -fields=machine -full | head -1)
-
 \# On CoreOS machine
 systemctl status paas-monitor
 systemctl cat paas-monitor
@@ -366,7 +357,7 @@ journalctl -u paas-monitor
 ## Template files
 * If you want to start multiple instances of a unit, you can use template files.
 * template unit names end in a @.
-    * eg. paas-monitor@.service
+    * eg. `paas-monitor@.service`
 * You cannot start a template file, without reaping havoc on fleet.
 * after submitting a template file, you can start load/start instances.
 
@@ -377,13 +368,12 @@ fleetctl start paas-monitor@{2..4}.service
 ```
 
 !SUB
-## Hands-on: paas-monitor template
+## Paas-monitor template
 * create a template file for paas-monitor.
 * start 4 instances of paas-monitor.
 
 !NOTE
 \# paas-monitor@.service
-
 ```
 [Unit]
 Description=paas-monitor
@@ -394,7 +384,6 @@ ExecStartPre=/usr/bin/docker pull mvanholsteijn/paas-monitor:latest
 ExecStart=/usr/bin/docker run -P mvanholsteijn/paas-monitor:latest
 SuccessExitStatus=0 2
 ```
-
 \# Typing instructions
 ```bash
 $ fleetctl submit paas-monitor@.service
@@ -416,7 +405,7 @@ In unit files you can reference meta information about the unit through specifie
 
 
 !SUB
-## Hands-on: matching Docker container names with unit names
+## Matching Docker container names with unit names
 * Modify your unit file to match the docker instance container name with the fleet unit name.
 
 !NOTE
@@ -458,8 +447,8 @@ SuccessExitStatus=0 SIGTERM
 !SUB
 ## Environment settings
 Environment variables to be loaded before running any of the commands.  Normally set to `/etc/environment` to obtain:
-- COREOS_PRIVATE_IPV4 - private IP address of this machine
-- COREOS_PUBLIC_IPV4 - public IP address of this machine
+- `COREOS_PRIVATE_IPV4` - private IP address of this machine
+- `COREOS_PUBLIC_IPV4` - public IP address of this machine
 
 Of course, you can add other environment files
 

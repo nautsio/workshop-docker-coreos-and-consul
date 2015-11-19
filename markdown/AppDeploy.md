@@ -1,18 +1,48 @@
-# Hands-on: Rolling Upgrade Application
+## Hands-on
+# Deploy Application
 
 !SUB
-## Hands-on: Deploy Application
-* Deploy 6 instances of the paas-monitor using fleetctl and this unit file --> [paas-monitor@.service](https://raw.githubusercontent.com/mvanholsteijn/coreos-container-platform-as-a-service/master/fleet-units/paas-monitor/paas-monitor%40.service)  
-* Open http://paas-monitor.127.0.0.1.xip.io:8080
-
+## Deploy Application
+Deploy 6 instances of the paas-monitor using fleetctl and this unit file [paas-monitor@.service](https://raw.githubusercontent.com/mvanholsteijn/coreos-container-platform-as-a-service/master/fleet-units/paas-monitor/paas-monitor%40.service)
 ```
-       host               rel      message                   #C       ART     LRT
-       47ea72be3817:1337  v1       Hello World from v1       53       8       11
-       cc4227a493d7:1337  v1       Hello World from v1       59       11      8
-       04a58012910c:1337  v1       Hello World from v1       54       7       6
-       090caf269f6a:1337  v1       Hello World from v1       58       7       7
-       096d01a63714:1337  v1       Hello World from v1       53       7       9
-       d43c0744622b:1337  v1       Hello World from v1       55       7       6
+[Unit]
+Description=%p
+
+[Service]
+Restart=always
+RestartSec=15
+TimeoutStartSec=2m
+
+ExecStartPre=-/usr/bin/docker kill %p-%i
+ExecStartPre=-/usr/bin/docker rm %p-%i
+
+ExecStart=/bin/sh -c "/usr/bin/docker run --rm --name %p-%i \
+	--env RELEASE=v1 \
+	--env SERVICE_NAME=%p \
+	--env SERVICE_TAGS=http \
+	-P \
+	--dns $(ifconfig docker0 | grep 'inet ' | awk '{print $2}') \
+	--dns-search=service.consul \
+	mvanholsteijn/paas-monitor"
+
+ExecStop=/usr/bin/docker stop %p-%i
+
+SuccessExitStatus=2
+SyslogIdentifier=%p-%i
+```
+
+
+!SUB
+## Check deployment results
+Open [paas-monitor.127.0.0.1.xip.io:8080](http://paas-monitor.127.0.0.1.xip.io:8080)
+```
+host               rel      message                   #C       ART     LRT
+47ea72be3817:1337  v1       Hello World from v1       53       8       11
+cc4227a493d7:1337  v1       Hello World from v1       59       11      8
+04a58012910c:1337  v1       Hello World from v1       54       7       6
+090caf269f6a:1337  v1       Hello World from v1       58       7       7
+096d01a63714:1337  v1       Hello World from v1       53       7       9
+d43c0744622b:1337  v1       Hello World from v1       55       7       6
 ```
 
 !NOTE
@@ -20,26 +50,24 @@
 ```bash
 \# Submit the paas-monitor template
 fleetctl submit paas-monitor@.service
-
 \# Load the paas-monitor app
 fleetctl load paas-monitor@{1..6}.service
-
 \# Start the paas-monitor app
 fleetctl start paas-monitor@{1..6}.service
-
 \# Check the status of the paas-monitor app
 fleetctl list-units | grep paas-monitor
 ```
 
 
 !SLIDE
-# Hands-on: Rolling upgrade
+## Hands-on
+# Rolling upgrade
 
 !SUB
-## Hands-on: Rolling upgrade
-* Change the environment variable RELEASE to v2 in the unit file
-* perform a rolling upgrade using fleetctl
-* continuously watch the monitor!
+## Rolling upgrade
+* Change the environment variable `RELEASE` to v2 in the unit file
+* Perform a rolling upgrade using fleetctl
+* Continuously watch the monitor!
 
 !NOTE
 \# Typing instructions
@@ -60,16 +88,16 @@ fleetctl destroy paas-monitor@{1..6}.service
 ```
 
 !SLIDE
-# Hands-on: killing an instance
+## Hands-on
+# Killing an instance
 
 !SUB
-## Hands-on: killing an instance
-* start a docker event stream.
-* kill one of the paas-monitor instances
-* watch the paas-monitor. What happens?
+## Killing an instance
+* Start a docker event stream.
+* Kill one of the paas-monitor instances
+* Watch the paas-monitor. What happens?
 
 !NOTE
-
 \# Typing instructions
 ```bash
 \# in separate window
@@ -79,12 +107,13 @@ vagrant ssh core-01 --  'docker kill $(docker ps | grep paas-monitor | awk "{ pr
 ```
 
 !SLIDE
-# Hands-on: killing a machine
+## Hands-on
+# Killing a machine
 
 !SUB
-## Hands-on: killing a machine
-* stop the machine core-03
-* watch the paas-monitor. What happens?
+## Killing a machine
+* Stop the machine `core-03`
+* Watch the paas-monitor. What happens?
 
 !NOTE
 \# Typing instructions
