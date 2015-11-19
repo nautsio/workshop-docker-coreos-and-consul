@@ -10,10 +10,8 @@
 !SUB
 ## Start the cluster
 ```
-git clone \
-  https://github.com/mvanholsteijn/coreos-container-platform-as-a-service.git
-cd coreos-container-platform-as-a-service
-cd vagrant
+git clone https://github.com/mvanholsteijn/coreos-container-platform-as-a-service.git
+cd coreos-container-platform-as-a-service/vagrant
 vagrant up
 . ./setenv
 ```
