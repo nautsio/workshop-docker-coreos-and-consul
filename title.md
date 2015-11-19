@@ -1,5 +1,6 @@
 <!-- .element: class="center" -->
 ![CoreOS logo](http://cdn.nauts.io/img/coreos.svg) <!-- .element: class="noblock" -->
+![plus](http://cdn.nauts.io/img/plus.svg) <!-- .element: class="noblock" -->
 ![Consul logo](images/consul-logo.png) <!-- .element: class="noblock" -->
 # A high available docker container platform
 ## Using CoreOS and Consul
