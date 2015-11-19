@@ -7,4 +7,4 @@
 
 [nauts.io/workshop-docker-coreos-and-consul](http://nauts.io/workshop-docker-coreos-and-consul)
 
-Mark van Holsteijn, Thomas Kruitbosch & Adé Mochtar
+Mark van Holsteijn, Thomas Kruitbosch & Ad&#233; Mochtar
